@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐客 - 免费在线听歌及音乐下载网站</title>
+    <meta name="keywords" content="音乐客、免费听歌、音乐下载、在线播放、歌词同步" />
+    <meta name="description" content="音乐客是一个免费在线听歌及音乐下载网站，提供丰富的音乐资源，支持多种音质选择，涵盖各种流派和风格，让你随时随地享受音乐">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = { darkMode: `class` }
+    </script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="./yinyueke.png">
+    <link rel="manifest" href="site.webmanifest">
+    <script>
+        // 自定义Tailwind配置
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF', // 蓝色主色调
+                        secondary: '#FF7D00', // 橙色辅助色
+                        neutral: {
+                            100: '#F5F7FA',
+                            200: '#E4E6EB',
+                            700: '#303133',
+                            800: '#1E1E20',
+                            900: '#141414'
+                        }
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.03);
+            }
+            .feature-card {
+                @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .icon-bg {
+                @apply bg-primary/10 dark:bg-primary/20 p-3 rounded-lg mr-4;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen font-inter bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+
+        <!-- 导航栏 -->
+        <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <a href="#" class="flex-shrink-0 flex items-center">
+                            <i class="fas fa-music text-primary text-xl mr-2"></i>
+                            <span class="text-primary font-bold text-xl">音乐客</span>
+                        </a>
+                        <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                            <a href="#about" class="border-b-2 border-primary px-1 pt-1 text-sm font-medium text-primary">网站介绍</a>
+                            <a href="#features" class="border-transparent hover:border-primary px-1 pt-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary">功能特点</a>
+                            <a href="#steps" class="border-transparent hover:border-primary px-1 pt-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary">使用步骤</a>
+                            <a href="#faq" class="border-transparent hover:border-primary px-1 pt-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary">常见问题</a>
+                            <a href="#reviews" class="border-transparent hover:border-primary px-1 pt-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary">用户评价</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" id="themeToggle">
+                            <i class="fas fa-moon-o text-gray-500 dark:text-yellow-400"></i>
+                        </button>
+                        <button class="ml-4 block sm:hidden p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-700" id="mobile-menu-button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 移动端菜单 -->
+            <div class="sm:hidden hidden" id="mobile-menu">
+                <div class="pt-2 pb-3 space-y-1 px-4">
+                    <a href="#about" class="bg-primary/5 border-l-4 border-primary text-primary block pl-3 pr-4 py-2 text-base font-medium">网站介绍</a>
+                    <a href="#features" class="border-l-4 border-transparent hover:border-primary hover:bg-primary/5 text-gray-600 dark:text-gray-300 hover:text-primary block pl-3 pr-4 py-2 text-base font-medium">功能特点</a>
+                    <a href="#steps" class="border-l-4 border-transparent hover:border-primary hover:bg-primary/5 text-gray-600 dark:text-gray-300 hover:text-primary block pl-3 pr-4 py-2 text-base font-medium">使用步骤</a>
+                    <a href="#faq" class="border-l-4 border-transparent hover:border-primary hover:bg-primary/5 text-gray-600 dark:text-gray-300 hover:text-primary block pl-3 pr-4 py-2 text-base font-medium">常见问题</a>
+                    <a href="#reviews" class="border-l-4 border-transparent hover:border-primary hover:bg-primary/5 text-gray-600 dark:text-gray-300 hover:text-primary block pl-3 pr-4 py-2 text-base font-medium">用户评价</a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="relative bg-gradient-to-r from-primary to-blue-500 text-white py-16 md:py-24 pt-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">音乐客</h1>
+                    <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">免费音乐平台，畅享无损音质</p>
+                    <div class="mt-8 flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                        <a class="bg-white text-primary hover:bg-gray-100 hover:scale-105 transition-transform font-medium py-3 px-6 rounded-lg shadow-lg"
+                           href="https://www.imi123.cn/sites/5802.html" target="_blank">
+                            <i class="fas fa-external-link-alt mr-2"></i>访问官网
+                        </a>
+                        <a class="bg-white text-primary hover:bg-gray-100 hover:scale-105 transition-transform font-medium py-3 px-6 rounded-lg shadow-lg"
+                           href="https://pan.quark.cn/s/0db22432c259" target="_blank">
+                            <i class="fas fa-search mr-2"></i>经典电影/无损音乐
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-black opacity-10"></div>
+        </header>
+
+        <!-- 增加隔离空间 -->
+        <div class="h-5 md:h-10"></div>
+
+        <!-- 网站介绍部分 -->
+        <section id="about" class="mb-16 fade-in" style="animation-delay: 0.4s">
+            <h2 class="text-2xl font-bold mb-8 flex items-center">
+                <div class="icon-bg">
+                    <i class="fas fa-info-circle text-primary text-xl"></i>
+                </div>
+                网站介绍
+            </h2>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                            <i class="fas fa-music text-primary mr-2"></i>音乐客是一个全站音乐资源免费在线播放和下载为主的网站，它致力于为用户提供更便捷的听歌体验，让音乐随时随地陪伴生活。
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            <i class="fas fa-search text-primary mr-2"></i>音乐客拥有海量的音乐资源，覆盖了各种流派和风格，你可以根据你的喜好和心情选择你想要的音乐。它不仅整合了多个资源渠道，突破了版权壁垒，还提供了丰富的社交功能，用户可以和其他音乐爱好者互动，参与各种有趣的活动。此外，音乐客的界面简洁清晰，操作方便，无论是新手还是资深音乐爱好者都能轻松上手。
+                        </p>
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                        <img src="./yinyueke.jpg" alt="音乐客网站展示" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能特点部分 -->
+        <section id="features" class="mb-16 fade-in" style="animation-delay: 0.6s">
+            <h2 class="text-2xl font-bold mb-8 flex items-center">
+                <div class="icon-bg">
+                    <i class="fas fa-thumbs-up text-primary text-xl"></i>
+                </div>
+                功能特点
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-search text-primary mr-2"></i>
+                        强大的音乐搜索
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        音乐客的搜索系统支持多种关键词，包括歌名、歌手、专辑，甚至歌词片段。用户可以轻松找到各类曲目，无论是热门金曲还是冷门独立音乐都能迅速定位。搜索结果展示直观，歌曲的来源、音质、时长等信息一目了然，用户可以自由选择不同的版本进行播放或下载。
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-play-circle text-primary mr-2"></i>
+                        流畅的在线播放
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        音乐客优化了音频加载速度，减少了等待时间，即便在网络状况一般的情况下，也能提供较为流畅的播放体验。它没有强制广告，打开即听，不会被各种弹窗或广告打断，让用户享受纯粹的音乐体验。
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-download text-primary mr-2"></i>
+                        灵活的音乐下载
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        音乐客提供了多种音质选择，包括标准、高清、无损等，用户可以根据自己的需求自由选择。下载后的音乐文件可以直接存储在本地，用户可以在任何设备上自由播放，不受网络环境的影响。此外，音乐客还支持用户自建曲库，用户可以将本地音乐文件导入，创建自己的音乐库，并与在线资源无缝结合。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 使用步骤部分 -->
+        <section id="steps" class="mb-16 fade-in" style="animation-delay: 0.6s">
+            <h2 class="text-2xl font-bold mb-8 flex items-center">
+                <div class="icon-bg">
+                    <i class="fas fa-step-forward text-primary text-xl"></i>
+                </div>
+                使用步骤
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-search text-primary mr-2"></i>
+                        搜索音乐
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        打开音乐客的官方网站，登录或注册账号。在搜索框中输入您想要听的歌曲名称、歌手名字或者歌词片段等关键词，然后点击搜索按钮。搜索结果会显示相关歌曲的列表，您可以查看歌曲的音质、时长等信息，选择您喜欢的歌曲进行播放或下载。
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-play text-primary mr-2"></i>
+                        播放音乐
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        在搜索结果页面，找到您想要播放的歌曲后，点击歌曲旁边的播放按钮，即可在线收听。音乐客的播放器支持歌词同步显示，让您在听歌的同时可以查看歌词。此外，您还可以创建和编辑播放列表，将喜欢的歌曲添加到播放列表中，方便后续收听。
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-download text-primary mr-2"></i>
+                        下载音乐
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        如果您想将歌曲下载到本地设备，可以在搜索结果页面找到您想要下载的歌曲，点击歌曲旁边的下载按钮。选择您需要的音质格式，如标准音质、高清音质或无损音质，然后点击确定开始下载。下载完成后，您可以在本地设备上离线收听。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见问题部分 -->
+        <section id="faq" class="mb-16 fade-in" style="animation-delay: 0.6s">
+            <h2 class="text-2xl font-bold mb-8 flex items-center">
+                <div class="icon-bg">
+                    <i class="fas fa-question-circle text-primary text-xl"></i>
+                </div>
+                常见问题
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-exclamation-triangle text-secondary mr-2"></i>
+                        无法播放音乐
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        可能是网络连接不稳定或服务器繁忙导致的。可以先检查网络连接是否正常，切换到其他网络环境再尝试播放。如果网络没问题，可以稍等片刻，等服务器压力缓解后再刷新页面。如果问题依然存在，可以尝试清理浏览器缓存或重新安装应用，以确保应用能够正常运行。
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-search text-secondary mr-2"></i>
+                        找不到想听的歌曲
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        可以尝试使用不同的关键词进行搜索，或者在分类导航中更详细地设置条件来查找。如果还是找不到，可以在平台的社区或论坛中询问其他用户，或者向平台客服反馈，请求添加该歌曲。此外，也可以关注平台的更新动态，看看是否有新歌曲上线。
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-tachometer-alt text-secondary mr-2"></i>
+                        下载速度慢
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        可能是网络带宽不足或服务器负载过高。可以尝试在不同的时间段进行下载，避开网络高峰期。如果使用的是移动网络，可以切换到Wi-Fi网络，以提高下载速度。此外，也可以尝试使用其他下载工具，如迅雷，来加速下载。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 用户评价部分 -->
+        <section id="reviews" class="mb-16 fade-in" style="animation-delay: 0.6s">
+            <h2 class="text-2xl font-bold mb-8 flex items-center">
+                <div class="icon-bg">
+                    <i class="fas fa-comments text-primary text-xl"></i>
+                </div>
+                用户评价
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover-scale">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/200/200?random=10" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-lg">音乐爱好者小王</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-quote-left text-primary/30 mr-2"></i>
+                        音乐客的资源真的很丰富，各种类型的音乐都能找到，而且完全免费，太棒了。
+                        <i class="fas fa-quote-right text-primary/30 ml-2"></i>
+                    </p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover-scale">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/200/200?random=11" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-lg">歌单达人小张</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-quote-left text-primary/30 mr-2"></i>
+                        我喜欢音乐客的播放列表功能，可以方便地创建和管理自己的歌单，随时随地听自己喜欢的歌。
+                        <i class="fas fa-quote-right text-primary/30 ml-2"></i>
+                    </p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover-scale">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/200/200?random=12" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-lg">音质控小破</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-quote-left text-primary/30 mr-2"></i>
+                        音乐客的无损音质下载功能满足了我的需求，让我可以享受到高品质的音乐。
+                        <i class="fas fa-quote-right text-primary/30 ml-2"></i>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-600 dark:text-gray-400 pt-8 border-t border-gray-200 dark:border-gray-700 fade-in" style="animation-delay: 1.2s">
+            <p class="text-sm">© 2025 音乐客 用户脚本平台</p>
+        </footer>
+
+    </div>
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('shadow-sm');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('shadow-sm');
+            }
+        });
+
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun text-yellow-400"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun text-yellow-400"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon-o text-gray-500"></i>';
+            }
+        });
+
+        // 淡入动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(element);
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    
+                    // 平滑滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // 减去导航栏高度
+                        behavior: 'smooth'
+                    });
+                    
+                    // 更新活动导航链接
+                    document.querySelectorAll('nav a').forEach(navLink => {
+                        navLink.classList.remove('border-primary');
+                        navLink.classList.add('border-transparent');
+                    });
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-primary');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
